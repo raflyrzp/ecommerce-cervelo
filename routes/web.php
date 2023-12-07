@@ -65,4 +65,6 @@ Route::middleware(['auth', 'userAkses:pembeli'])->group(function () {
     Route::get('/payment/{pemesananId}', [CheckoutController::class, 'pendingPayment'])->name('pending-payment');
 
     Route::get('/checkout-success/{transaction}', [CheckoutController::class, 'success'])->name('checkout-success');
+
+    Route::post('/keranjang/update-quantity', [KeranjangController::class, 'updateQuantity'])->name('keranjang.updateQuantity');
 });

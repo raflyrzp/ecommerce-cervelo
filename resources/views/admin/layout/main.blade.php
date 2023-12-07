@@ -36,6 +36,43 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
+    @if (session('success'))
+        <link rel="stylesheet" href="{{ asset('admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}" />
+
+        <script src="{{ asset('admin/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+        <script>
+            var Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+            });
+
+            Toast.fire({
+                icon: "success",
+                title: "{{ session('success') }}",
+            });
+        </script>
+    @endif
+
+    @if (session('error'))
+        <link rel="stylesheet" href="{{ asset('admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}" />
+
+        <script src="{{ asset('admin/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+        <script>
+            var Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+            });
+
+            Toast.fire({
+                icon: "error",
+                title: "{{ session('error') }}",
+            });
+        </script>
+    @endif
     <div class="wrapper">
         @include('admin/partials/header');
         @include('admin/partials/sidebar');

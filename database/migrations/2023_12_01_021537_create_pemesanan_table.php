@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('email');
             $table->timestamp('tgl_pemesanan');
             $table->integer('jumlah_produk');
-            $table->decimal('total_harga', 10, 0);
+            $table->decimal('total_harga', 15, 0);
             $table->enum('status', ['pending', 'dibayar', 'dikirim', 'diterima']);
             $table->unsignedBigInteger('id_pengiriman');
             $table->timestamps();

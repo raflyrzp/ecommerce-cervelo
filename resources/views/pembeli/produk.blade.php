@@ -41,7 +41,7 @@
                                         style="color: #bbb;">Rating</span></a>
                             </p>
                             <p class="text-left">
-                                <a href="#" class="mr-2" style="color: #000;">500 <span
+                                <a href="#" class="mr-2" style="color: #000;">{{ $sold }} <span
                                         style="color: #bbb;">Sold</span></a>
                             </p>
                         </div>
@@ -54,7 +54,7 @@
                             <div class="input-group col-md-6 d-flex mb-3">
 
                                 <span class="input-group-btn mr-2">
-                                    <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
+                                    <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="jumlah_produk">
                                         <i class="ion-ios-remove"></i>
                                     </button>
                                 </span>
@@ -64,18 +64,18 @@
                                 <input type="text" id="jumlah_produk" name="jumlah_produk"
                                     class="quantity form-control input-number" value="1" min="1" max="100">
                                 <span class="input-group-btn ml-2">
-                                    <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
+                                    <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="jumlah_produk">
                                         <i class="ion-ios-add"></i>
                                     </button>
                                 </span>
                             </div>
                             <div class="w-100"></div>
                             <div class="col-md-12">
-                                <p style="color: #000;">{{ $produk->stok }} piece available</p>
+                                <p style="color: #000;">{{ $produk->stok }} piece(s) available</p>
                             </div>
                         </div>
                         <p><button type="submit"><a href="" class="btn btn-black py-3 px-5 mr-2">Add to Cart</a></button>
-                            <a href="cart.html" class="btn btn-primary py-3 px-5">Buy now</a>
+                            <a href="" class="btn btn-primary py-3 px-5">Buy now</a>
                         </p>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                             href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Description</a>
 
                         <a class="nav-link ftco-animate mr-lg-1" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2"
-                            role="tab" aria-controls="v-pills-2" aria-selected="false">Manufacturer</a>
+                            role="tab" aria-controls="v-pills-2" aria-selected="false">About</a>
 
                         <a class="nav-link ftco-animate" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3"
                             role="tab" aria-controls="v-pills-3" aria-selected="false">Reviews</a>
@@ -106,25 +106,15 @@
                         <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel"
                             aria-labelledby="day-1-tab">
                             <div class="p-4">
-                                <h3 class="mb-4">Nike Free RN 2019 iD</h3>
-                                <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from
-                                    it would have been rewritten a thousand times and everything that was left from its
-                                    origin would be the word "and" and the Little Blind Text should turn around and return
-                                    to its own, safe country. But nothing the copy said could convince her and so it didn’t
-                                    take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and
-                                    Parole and dragged her into their agency, where they abused her for their.</p>
+                                <h3 class="mb-4">{{ $produk->nama_produk }}</h3>
+                                <p>{{ $produk->deskripsi }}</p>
                             </div>
                         </div>
 
                         <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-day-2-tab">
                             <div class="p-4">
-                                <h3 class="mb-4">Manufactured By Nike</h3>
-                                <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from
-                                    it would have been rewritten a thousand times and everything that was left from its
-                                    origin would be the word "and" and the Little Blind Text should turn around and return
-                                    to its own, safe country. But nothing the copy said could convince her and so it didn’t
-                                    take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and
-                                    Parole and dragged her into their agency, where they abused her for their.</p>
+                                <h3 class="mb-4">About Cervelo</h3>
+                                <p>Cervélo Cycles is a Canadian manufacturer of racing and track bicycles. Cervélo uses CAD, computational fluid dynamics, and wind tunnel testing at a variety of facilities including the San Diego Air and Space Technology Center, in California, US, to aid its designs. Frame materials include carbon fibre. Cervélo currently makes 5 series of bikes: the C series and R series of road bikes, the latter featuring multi-shaped, "Squoval" frame tubes the S series of road bikes and P series of triathlon/time trial bikes, both of which feature airfoil shaped down tubes; and the T series of track bikes. In professional competition, cyclists have ridden Cervélo bicycles to victory in all three of road cycling's grand tours: the Tour de France the Giro d'Italia and the Vuelta a España.</p>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-day-3-tab">
@@ -266,3 +256,31 @@
         </div>
     </section>
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.quantity-right-plus').on('click', function (e) {
+            e.preventDefault();
+            var fieldName = $(this).attr('data-field');
+            var currentVal = parseInt($('input[name=' + fieldName + ']').val(), 10);
+            if (!isNaN(currentVal)) {
+                $('input[name=' + fieldName + ']').val(currentVal + 1);
+            } else {
+                $('input[name=' + fieldName + ']').val(1);
+            }
+        });
+
+        $('.quantity-left-minus').on('click', function (e) {
+            e.preventDefault();
+            var fieldName = $(this).attr('data-field');
+            var currentVal = parseInt($('input[name=' + fieldName + ']').val(), 10);
+            if (!isNaN(currentVal) && currentVal > 1) {
+                $('input[name=' + fieldName + ']').val(currentVal - 1);
+            } else {
+                $('input[name=' + fieldName + ']').val(1);
+            }
+        });
+    });
+</script>

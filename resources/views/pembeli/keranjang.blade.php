@@ -63,17 +63,16 @@
 
                                             <td class="quantity">
                                                 <div class="input-group mb-3">
-
                                                     <input type="text" name="kuantitas"
-                                                        class="quantity form-control input-number"
+                                                        class="quantity form-control input-number quantity-input"
                                                         data-product-id="{{ $keranjang->produk->id }}"
                                                         value="{{ $keranjang->jumlah_produk }}" min="1"
                                                         max="100">
-
                                                 </div>
                                             </td>
 
-                                            <td class="total">
+
+                                            <td class="total-price" data-product-id="{{ $keranjang->produk->id }}">
                                                 IDR.{{ number_format($keranjang->total_harga, 0, ',', '.') }},00
                                             </td>
 
@@ -133,3 +132,30 @@
         </section>
     </form>
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.quantity-input').on('input', function() {
+            var productId = $(this).data('product-id');
+            var newQuantity = $(this).val();
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('keranjang.updateQuantity') }}',
+                data: {
+                    productId: productId,
+                    newQuantity: newQuantity,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(data) {
+                    console.log(data);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>

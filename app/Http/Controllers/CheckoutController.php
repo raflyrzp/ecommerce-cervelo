@@ -27,7 +27,6 @@ class CheckoutController extends Controller
         return view('pembeli.checkout', [
             'data_keranjang' => $data_keranjang,
             'data_pengiriman' => $data_pengiriman,
-
             'title' => 'Checkout'
         ]);
     }
@@ -38,10 +37,7 @@ class CheckoutController extends Controller
         $data_pengiriman = Pengiriman::all();
         $data_keranjang = Keranjang::all();
 
-
-
         $subtotal = 0;
-
         foreach ($data_keranjang as $keranjang) {
             $totalHargaPerItem = $keranjang->produk->harga_produk * $keranjang->jumlah_produk;
             $subtotal += $totalHargaPerItem;

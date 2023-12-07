@@ -8,7 +8,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 
-   
+
 
     <link rel="stylesheet" href="{{ asset('pembeli/css/open-iconic-bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('pembeli/css/animate.css') }}">
@@ -35,6 +35,44 @@
 </head>
 
 <body class="goto-here">
+
+    @if (session('success'))
+        <link rel="stylesheet" href="{{ asset('admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}" />
+
+        <script src="{{ asset('admin/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+        <script>
+            var Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+            });
+
+            Toast.fire({
+                icon: "success",
+                title: "{{ session('success') }}",
+            });
+        </script>
+    @endif
+
+    @if (session('error'))
+        <link rel="stylesheet" href="{{ asset('admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}" />
+
+        <script src="{{ asset('admin/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+        <script>
+            var Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+            });
+
+            Toast.fire({
+                icon: "error",
+                title: "{{ session('error') }}",
+            });
+        </script>
+    @endif
 
     @include('pembeli.partials.header')
 

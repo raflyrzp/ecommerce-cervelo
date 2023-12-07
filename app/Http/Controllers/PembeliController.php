@@ -24,7 +24,7 @@ class PembeliController extends Controller
             ->take(4)
             ->get();
 
-        $data_produk = Produk::all();
+        $data_produk = Produk::latest()->take(4)->get();
 
         return view('pembeli.index', [
             'data_produk' => $data_produk,

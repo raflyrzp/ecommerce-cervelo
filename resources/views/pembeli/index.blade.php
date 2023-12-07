@@ -8,6 +8,29 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 @section('container')
+    @if (session('success'))
+        <!-- SweetAlert2 -->
+        <link
+        rel="stylesheet"
+        href="{{ asset('admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}"
+      />
+        <!-- SweetAlert2 -->
+        <script src="{{ asset('admin/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+        <script>
+            var Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+            });
+
+            Toast.fire({
+                icon: "success",
+                title: "{{ session('success') }}",
+            });
+        </script>
+    @endif
+
     <section id="home-section" class="hero">
         <div class="home-slider owl-carousel">
             <div class="slider-item js-fullheight">
@@ -234,7 +257,8 @@
                                             <h2>CERVELO AZA</h2>
                                             <p>Separated they live in Bookmarksgrove right at the coast of the
                                                 Semantics, a large language ocean.</p>
-                                            <p><a href="{{ route('shop') }}" class="btn btn-black px-3 py-2">Shop now</a></p>
+                                            <p><a href="{{ route('shop') }}" class="btn btn-black px-3 py-2">Shop now</a>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -246,7 +270,8 @@
                                             <h2>Best Sellers</h2>
                                             <p>Separated they live in Bookmarksgrove right at the coast of the
                                                 Semantics, a large language ocean.</p>
-                                            <p><a href="{{ route('shop') }}" class="btn btn-black px-3 py-2">Shop now</a></p>
+                                            <p><a href="{{ route('shop') }}" class="btn btn-black px-3 py-2">Shop now</a>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -454,12 +479,12 @@
     </section>
 
 
-  
+
     <div class="modal fade" id="promoModal" tabindex="-1" aria-labelledby="promoLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-body p-0">
-                    <section class="ftco-section ftco-deal bg-primary">
+                    <section class="ftco-section ftco-deal" style="background-image: url({{ asset('pembeli/images/background-popup2.png') }}); background-size:cover; width:100%; height:100%; background-position:100% center;">
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6 position-relative">
@@ -479,20 +504,20 @@
                                         <p class="price"><span class="price-sale">IDR.
                                                 {{ number_format($produk_terlaris[0]->harga_produk, 0, ',', '.') }},00</span>
                                         </p>
-                                        <ul class="thumb-deal d-flex mt-4">
+                                        <ul class="thumb-deal d-flex mt-4 wrap">
                                             <a href="{{ route('produk.show', $produk_terlaris[1]->id) }}">
                                                 <li class="img"
                                                     style="background-image: url({{ asset('storage/produk/' . $produk_terlaris[1]->image) }}); background-size: cover; width:150px; height:100px;">
                                                 </li>
                                             </a>
-                                            <a href="{{ route('produk.show', $produk_terlaris[1]->id) }}">
+                                            <a href="{{ route('produk.show', $produk_terlaris[2]->id) }}">
                                                 <li class="img"
-                                                    style="background-image: url({{ asset('storage/produk/' . $produk_terlaris[1]->image) }}); background-size: cover; width:150px; height:100px;">
+                                                    style="background-image: url({{ asset('storage/produk/' . $produk_terlaris[2]->image) }}); background-size: cover; width:150px; height:100px;">
                                                 </li>
                                             </a>
-                                            <a href="{{ route('produk.show', $produk_terlaris[1]->id) }}">
+                                            <a href="{{ route('produk.show', $produk_terlaris[3]->id) }}">
                                                 <li class="img"
-                                                    style="background-image: url({{ asset('storage/produk/' . $produk_terlaris[1]->image) }}); background-size: cover; width:150px; height:100px;">
+                                                    style="background-image: url({{ asset('storage/produk/' . $produk_terlaris[3]->image) }}); background-size: cover; width:150px; height:100px;">
                                                 </li>
                                             </a>
 

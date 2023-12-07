@@ -135,4 +135,26 @@ class KeranjangController extends Controller
         return redirect()->route('keranjang.index')->with('success', 'Successfully deleted a product from the cart');
     }
 
+    public function updateQuantity(Request $request)
+    {
+        $productId = $request->productId;
+        $newQuantity = $request->newQuantity;
+
+        $request->validate([
+            'productId' => 'required|exists:produk,id',
+            'newQuantity' => 'required|numeric|min:1',
+        ]);
+
+        $keranjang = Keranjang::where('id_produk', $productId)->first();
+
+        if (!$keranjang) {
+            return response()->json(['error' => 'Product not found in the cart.']);
+        }
+
+        $keranjang->jumlah_produk = $newQuantity;
+        $keranjang->total_harga = $newQuantity * $keranjang->produk->harga_produk;
+        $keranjang->save();
+
+        return response()->json(['success' => true]);
+    }
 }

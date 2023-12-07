@@ -13,8 +13,6 @@
                         class="nav-link">Home</a></li>
                 <li class="nav-item {{ $title === 'Shop' ? 'active' : '' }}"><a href="{{ route('shop') }}"
                         class="nav-link">Shop</a></li>
-                <li class="nav-item {{ $title === 'About' ? 'active' : '' }}"><a href="about.html"
-                        class="nav-link">About</a></li>
                 <li class="nav-item cta cta-colored {{ $title === 'Cart' ? 'active' : '' }}"><a
                         href="{{ route('keranjang.index') }}" class="nav-link"><span
                             class="icon-shopping_cart"></span>[{{ count(App\Models\Keranjang::all()) }}]</a></li>

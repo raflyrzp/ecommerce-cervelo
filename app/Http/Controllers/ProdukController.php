@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produk;
+use App\Models\Pemesanan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -67,8 +68,12 @@ class ProdukController extends Controller
     {
         $produk = Produk::findOrFail($id);
 
+        $sold = Pemesanan::where('id_produk', $id)
+        ->sum('jumlah_produk');
+
         return view('pembeli.produk', [
             'produk' => $produk,
+            'sold' => $sold,
             'title' => 'Detail Produk'
         ]);
     }

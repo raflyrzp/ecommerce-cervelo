@@ -47,7 +47,8 @@
                                                 data-bs-target="#addToCart{{ $produk->id }}"><span>Add
                                                     to
                                                     cart <i class="ion-ios-add ml-1"></i></span></a>
-                                            <a href="#" class="buy-now text-center py-2">Buy now<span><i
+                                            <a href="#" class="buy-now text-center py-2" data-bs-toggle="modal"
+                                                data-bs-target="#addToCart{{ $produk->id }}">Buy now<span><i
                                                         class="ion-ios-cart ml-1"></i></span></a>
                                         </p>
                                     </div>
@@ -116,11 +117,20 @@
                                             <div class="form-field">
                                                 <i class="icon icon-arrow-down3"></i>
                                                 <select name="price_from" id="price_from" class="form-control">
-                                                    <option value="1" {{ old('price_from') == 1 ? 'selected' : '' }}>1</option>
-                                                    <option value="1000000" {{ old('price_from') == 1000000 ? 'selected' : '' }}>IDR. 1.000.000,00</option>
-                                                    <option value="10000000" {{ old('price_from') == 10000000 ? 'selected' : '' }}>IDR. 10.000.000,00</option>
-                                                    <option value="50000000" {{ old('price_from') == 50000000 ? 'selected' : '' }}>IDR. 50.000.000,00</option>
-                                                    <option value="100000000" {{ old('price_from') == 100000000 ? 'selected' : '' }}>IDR. 100.000.000,00</option>
+                                                    <option value="1" {{ old('price_from') == 1 ? 'selected' : '' }}>
+                                                        IDR. 1,00</option>
+                                                    <option value="1000000"
+                                                        {{ old('price_from') == 1000000 ? 'selected' : '' }}>IDR.
+                                                        1.000.000,00</option>
+                                                    <option value="10000000"
+                                                        {{ old('price_from') == 10000000 ? 'selected' : '' }}>IDR.
+                                                        10.000.000,00</option>
+                                                    <option value="50000000"
+                                                        {{ old('price_from') == 50000000 ? 'selected' : '' }}>IDR.
+                                                        50.000.000,00</option>
+                                                    <option value="100000000"
+                                                        {{ old('price_from') == 100000000 ? 'selected' : '' }}>IDR.
+                                                        100.000.000,00</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -131,11 +141,21 @@
                                             <div class="form-field">
                                                 <i class="icon icon-arrow-down3"></i>
                                                 <select name="price_to" id="price_to" class="form-control">
-                                                    <option value="1000000" {{ old('price_to') == 1000000 ? 'selected' : '' }}>IDR. 1.000.000,00</option>
-                                                    <option value="10000000" {{ old('price_to') == 10000000 ? 'selected' : '' }}>IDR. 10.000.000,00</option>
-                                                    <option value="50000000" {{ old('price_to') == 50000000 ? 'selected' : '' }}>IDR. 50.000.000,00</option>
-                                                    <option value="100000000" {{ old('price_to') == 100000000 ? 'selected' : '' }}>IDR. 100.000.000,00</option>
-                                                    <option value="500000000" {{ old('price_to') == 500000000 ? 'selected' : '' }}>IDR. 500.000.000,00</option>
+                                                    <option value="1000000"
+                                                        {{ old('price_to') == 1000000 ? 'selected' : '' }}>IDR.
+                                                        1.000.000,00</option>
+                                                    <option value="10000000"
+                                                        {{ old('price_to') == 10000000 ? 'selected' : '' }}>IDR.
+                                                        10.000.000,00</option>
+                                                    <option value="50000000"
+                                                        {{ old('price_to') == 50000000 ? 'selected' : '' }}>IDR.
+                                                        50.000.000,00</option>
+                                                    <option value="100000000"
+                                                        {{ old('price_to') == 100000000 ? 'selected' : '' }}>IDR.
+                                                        100.000.000,00</option>
+                                                    <option value="500000000"
+                                                        {{ old('price_to') == 500000000 ? 'selected' : '' }}>IDR.
+                                                        500.000.000,00</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -143,7 +163,7 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary">Filter</button>
                             </form>
-                            
+
                         </div>
                     </div>
                 </div>

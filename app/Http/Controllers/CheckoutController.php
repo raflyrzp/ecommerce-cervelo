@@ -15,25 +15,17 @@ use Midtrans\Snap;
 
 class CheckoutController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function buyNow($id)
     {
-        $data_keranjang = Keranjang::all();
-        $data_pengiriman = Pengiriman::all();
+        $selectedProduct = Produk::findOrFail($id);
 
-
-        return view('pembeli.checkout', [
-            'data_keranjang' => $data_keranjang,
-            'data_pengiriman' => $data_pengiriman,
-            'title' => 'Checkout'
-        ]);
+        return redirect()->route('checkout', ['selectedProducts' => [$selectedProduct->id]]);
     }
 
     public function checkout(Request $request)
     {
         $selectedProductIds = $request->selectedProducts;
+        dd($selectedProductIds);
         $data_pengiriman = Pengiriman::all();
         $data_keranjang = Keranjang::all();
 
@@ -66,6 +58,7 @@ class CheckoutController extends Controller
             return redirect()->route('keranjang.index')->with('error', 'No products selected for checkout.');
         }
     }
+
 
     public function prosesCheckout(Request $request)
     {
@@ -149,21 +142,17 @@ class CheckoutController extends Controller
 
     public function pendingPayment(Request $request, $pemesananId)
     {
-        // Ambil pemesanan berdasarkan ID
         $pemesanan = Pemesanan::findOrFail($pemesananId);
 
-        // Pastikan status pemesanan adalah 'pending'
         if ($pemesanan->status !== 'pending') {
             return redirect()->back()->with('error', 'Invalid order status for payment processing.');
         }
 
-        // Set konfigurasi Midtrans
         MidtransConfig::$serverKey = config('midtrans.serverKey');
         MidtransConfig::$isProduction = config('midtrans.isProduction');
         MidtransConfig::$isSanitized = config('midtrans.isSanitized');
         MidtransConfig::$is3ds = config('midtrans.is3ds');
 
-        // Buat parameter untuk mendapatkan token pembayaran dari Midtrans
         $params = [
             'transaction_details' => [
                 'order_id' => uniqid(),
@@ -175,7 +164,6 @@ class CheckoutController extends Controller
             ]
         ];
 
-        // Dapatkan token pembayaran dari Midtrans
         $snapToken = Snap::getSnapToken($params);
 
         return view('pembeli.payment', [

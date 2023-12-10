@@ -74,7 +74,7 @@
                                 <p style="color: #000;">{{ $produk->stok }} piece(s) available</p>
                             </div>
                         </div>
-                        <p><button type="submit"><a href="" class="btn btn-black py-3 px-5 mr-2">Add to Cart</a></button>
+                        <p><a href="" class="btn btn-black"><button type="submit" class="text-white">Add to Cart</button></a>
                             <a href="" class="btn btn-primary py-3 px-5">Buy now</a>
                         </p>
                     </div>

@@ -65,7 +65,7 @@ class PembeliController extends Controller
         $data_pemesanan = Pemesanan::where('id_pembeli', $id)
         ->orderBy('status', 'asc') // 'pending' akan muncul di atas
         ->orderBy('tgl_pemesanan', 'desc') // Urutkan berdasarkan tanggal pemesanan
-        ->get();
+        ->paginate(5);
 
     return view('pembeli.pemesanan', [
         'data_pemesanan' => $data_pemesanan,
